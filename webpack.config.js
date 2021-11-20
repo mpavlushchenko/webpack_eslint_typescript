@@ -1,5 +1,8 @@
+const webpack = require('webpack');
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const publicPath = process.env.PUBLIC_URL || '/';
 
@@ -32,6 +35,21 @@ function getConfig(dotenv, isProd) {
             loader: "babel-loader"
           },
         },
+          {
+              test: /\.(scss|css)$/,
+              use: [
+                  isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+                  {
+                      loader: 'css-loader',
+                      options: {
+                          importLoaders: isProd ? 2 : 1,
+                          sourceMap: !isProd,
+                      },
+                  },
+                  { loader: 'postcss-loader', options: { sourceMap: !isProd } },
+                  { loader: 'sass-loader', options: { sourceMap: !isProd } },
+              ],
+          },
         {
           test: /\.css$/,
           use: ["style-loader", "css-loader"]
@@ -39,10 +57,25 @@ function getConfig(dotenv, isProd) {
       ].filter(Boolean),
     },
     plugins: [
+        isProd
+            ? new MiniCssExtractPlugin({
+                // Extracts CSS into separate files
+                // Note: style-loader is for development, MiniCssExtractPlugin is for production
+                filename: '[name].[contenthash].css',
+                chunkFilename: '[id].css',
+            })
+            : undefined,
+
       new HtmlWebpackPlugin({
         template: "public/index.html"
-      })
+      }),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(dotenv),
+        }),
+
+      !isProd && new ReactRefreshWebpackPlugin(),
     ].filter(Boolean),
+
     target: isProd ? "browserslist" : "web",
     resolve: {
       extensions: ['.ts', '.tsx', '.js']
