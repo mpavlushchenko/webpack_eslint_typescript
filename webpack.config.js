@@ -36,6 +36,20 @@ function getConfig(dotenv, isProd) {
           },
         },
           {
+              test: /\.m?js/,
+              resolve: {
+                  fullySpecified: false,
+              },
+          },
+          {
+              test: /\.[tj]sx?$/,
+              loader: 'babel-loader',
+              exclude: /node_modules/,
+              options: {
+                  plugins: [!isProd && require.resolve('react-refresh/babel')].filter(Boolean),
+              },
+          },
+          {
               test: /\.(scss|css)$/,
               use: [
                   isProd ? MiniCssExtractPlugin.loader : 'style-loader',
