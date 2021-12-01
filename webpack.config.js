@@ -114,7 +114,7 @@ module.exports = (env = {}) => {
       }
     : {
         APP_ENV: 'local',
-        API_URL: '',
+        API_URL: 'https://jsonplaceholder.typicode.com',
       };
 
   return getConfig(dotenv, isProduction);

@@ -5,6 +5,7 @@ import Card from '../../Components/Card';
 import filterPhotosById, { FilteredIPhotos } from '../../utils/filterPhotosById';
 import IPhotos from './types';
 import './styles.scss';
+import client from '../../services/api';
 
 const MIN_PHOTO_VALUE: number = 3;
 
@@ -12,8 +13,7 @@ const Photos = () => {
   const useFetchPhotos = (page = 1) =>
     useQuery<IPhotos[]>(
       'photos',
-      () =>
-        fetch(`https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=5`).then((response) => response.json()),
+      () => client.get(`/photos?_page=${page}&_limit=5`).then((response) => response.data),
       { staleTime: 10000 }
     );
 
