@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "target": "esnext", // Тип кода создаваемого итогового файла.
-    "allowJs": false, // Разрешать компилировать файлы с JavaScript-кодом?
-    "jsx": "react", // Включать ли поддержку ".tsx" файлов?
-    "module": "ES2020", // Определяет тип импорта кода в итоговом файле, прописанном в "outFile". Необходимо задавать при использовании опции "outFile".
-    "moduleResolution": "node", // Определить способ поиска модулей в папках: как в Node.js или классический, как в TypeScript 1.5 и ниже.
+    "target": "esnext",
+    "allowJs": false,
+    "jsx": "react",
+    "module": "ES2020",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
-    "noUnusedLocals": true, // Показывать ошибку, если где-то найдены неиспользуемые локальные значения.
-    "noUnusedParameters": true, // Показывать ошибку, если где-то найдены неиспользуемые параметры.
-    "noImplicitReturns": true, // Сообщить об ошибке, когда не все пути кода в функции возвращают значение?
-    "forceConsistentCasingInFileNames": true, // Запретить несогласованные ссылки на один и тот же файл?
+    "noUnusedLocals": true,
+    "noUnusedParameters": true ,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "noEmit": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noUncheckedIndexedAccess": true,
-    "skipLibCheck": true // Не проверять типы, заданные во всех файлах описания типов (*.d.ts)?
+    "skipLibCheck": true
   },
   "include": ["src"]
 }

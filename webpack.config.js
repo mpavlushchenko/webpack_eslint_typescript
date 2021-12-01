@@ -1,17 +1,17 @@
-const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const publicPath = process.env.PUBLIC_URL || '/'
+const publicPath = process.env.PUBLIC_URL || '/';
 
 function getConfig(dotenv, isProd) {
   return {
     mode: isProd ? 'production' : 'development',
     entry: ['./src/index.tsx'],
-    devtool: isProd ? false : 'inline-source-map',
+    devtool: isProd ? 'none' : 'inline-source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
       publicPath,
@@ -52,22 +52,20 @@ function getConfig(dotenv, isProd) {
         },
         {
           test: /\.(scss|css)$/,
-          use: [
-            isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: isProd ? 2 : 1,
-                sourceMap: !isProd,
-              },
-            },
-            { loader: 'postcss-loader', options: { sourceMap: !isProd } },
-            { loader: 'sass-loader', options: { sourceMap: !isProd } },
-          ],
+          use: ['style-loader', 'css-loader', 'sass-loader'],
         },
         {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
+          test: /\.sass$/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                indentedSyntax: true,
+              },
+            },
+          ],
         },
       ].filter(Boolean),
     },
@@ -100,12 +98,13 @@ function getConfig(dotenv, isProd) {
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
     },
-  }
+  };
 }
 
 module.exports = (env = {}) => {
-  const isProduction = env.production
-  process.env.NODE_ENV = isProduction ? 'production' : 'development'
+  const isProduction = env.production;
+
+  process.env.NODE_ENV = isProduction ? 'production' : 'development';
 
   const dotenv = isProduction
     ? {
@@ -116,7 +115,7 @@ module.exports = (env = {}) => {
     : {
         APP_ENV: 'local',
         API_URL: '',
-      }
+      };
 
-  return getConfig(dotenv, isProduction)
-}
+  return getConfig(dotenv, isProduction);
+};

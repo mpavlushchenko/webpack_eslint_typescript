@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
+import Photos from './Pages/Photos/Photos';
+
+import 'antd/dist/antd.css';
+
+const queryClient = new QueryClient();
 const App = () => {
-  console.log('test')
+  console.log('test', process.env);
 
-  return <h3>Hello World!!</h3>
-}
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Photos />
+    </QueryClientProvider>
+  );
+};
 
-export default App
+export default App;
