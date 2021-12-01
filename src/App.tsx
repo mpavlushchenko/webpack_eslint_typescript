@@ -1,8 +1,10 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import Photos from './Pages/Photos/Photos';
+import { ToastContainer } from 'react-toastify';
 
+import Photos from './Pages/Photos/Photos';
+import 'react-toastify/dist/ReactToastify.css';
 import 'antd/dist/antd.css';
 
 const queryClient = new QueryClient();
@@ -11,6 +13,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ToastContainer position="top-center" autoClose={2000} />
       <Photos />
     </QueryClientProvider>
   );
