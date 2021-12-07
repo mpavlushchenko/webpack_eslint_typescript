@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from './types';
 import { addMetadata, bind } from './decorators';
 import CreateElement from '../../Components/Elements/CreateElement';
+import Notify from '../../services/notifyTypes';
 
 interface BannerProps {
   readonly userName: string;
@@ -22,6 +23,12 @@ interface Banner extends MetaData {}
 
 @addMetadata
 class Banner extends React.Component<BannerProps, BannerState> {
+  static notifyOnChange<T>(value: T): T[] {
+    Notify.success(value);
+
+    return [value];
+  }
+
   state: BannerState = {
     projectName: 'Pet',
     clicks: 0,
@@ -34,6 +41,7 @@ class Banner extends React.Component<BannerProps, BannerState> {
 
   @bind
   clickHandler() {
+    Banner.notifyOnChange('Clicked');
     this.setState(({ clicks }) => ({ clicks: clicks + 1 }));
   }
 
