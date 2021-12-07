@@ -3,9 +3,9 @@ import { useQuery } from 'react-query';
 
 import Card from '../../Components/Card';
 import filterPhotosById, { FilteredIPhotos } from '../../utils/filterPhotosById';
+import client from '../../services/api';
 import IPhotos from './types';
 import './styles.scss';
-import client from '../../services/api';
 
 const MIN_PHOTO_VALUE: number = 3;
 

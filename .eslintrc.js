@@ -20,6 +20,7 @@ module.exports = {
   parser: 'babel-eslint',
   plugins: ['eslint-plugin-import'],
   rules: {
+    'react/state-in-constructor': 0,
     'react/require-default-props': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/jsx-props-no-spreading': 'off',
