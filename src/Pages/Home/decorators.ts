@@ -7,6 +7,12 @@ function addMetadata<T extends { new (...args: any[]): {} }>(constructor: T) {
   };
 }
 
+function BaseEntity(ctr: Function) {
+  const Element = ctr;
+  Element.prototype.id = Math.random();
+  Element.prototype.created = new Date().toLocaleString('es-ES');
+}
+
 // Parameter Decorators
 function bind<T extends Function>(
   target: object,
@@ -28,4 +34,4 @@ function bind<T extends Function>(
   };
 }
 
-export { addMetadata, bind };
+export { addMetadata, bind, BaseEntity };

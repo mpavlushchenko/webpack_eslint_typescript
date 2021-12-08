@@ -9,7 +9,7 @@ import './styles.scss';
 
 const MIN_PHOTO_VALUE: number = 3;
 
-const Photos = () => {
+const Photos = (): JSX.Element => {
   const useFetchPhotos = (page = 1) =>
     useQuery<IPhotos[]>(
       'photos',

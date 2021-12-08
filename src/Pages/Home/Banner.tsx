@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from './types';
-import { addMetadata, bind } from './decorators';
+import { addMetadata, bind, BaseEntity } from './decorators';
 import CreateElement from '../../Components/Elements/CreateElement';
 import Notify from '../../services/notifyTypes';
 
@@ -12,7 +12,7 @@ interface BannerState {
   projectName: string;
   clicks: number;
 }
-type UserMetadata = Pick<Metadata, 'title' | 'postURL'>;
+type UserMetadata = Pick<Metadata, 'id' | 'created' | 'title' | 'postURL'>;
 
 interface MetaData extends UserMetadata {
   title: string;
@@ -21,6 +21,7 @@ interface MetaData extends UserMetadata {
 
 interface Banner extends MetaData {}
 
+@BaseEntity
 @addMetadata
 class Banner extends React.Component<BannerProps, BannerState> {
   static notifyOnChange<T>(value: T): T[] {
@@ -35,8 +36,8 @@ class Banner extends React.Component<BannerProps, BannerState> {
   };
 
   getMetadata(): UserMetadata {
-    const { title, postURL } = this;
-    return { title, postURL };
+    const { id, created, title, postURL } = this;
+    return { id, created, title, postURL };
   }
 
   @bind

@@ -1,5 +1,5 @@
 type Role = { admin: string; user: string };
 
-type Metadata = { title: string; postURL: string; type?: 'partially' | 'without access' };
+type Metadata = { id: number; created: string; title: string; postURL: string; type?: 'partially' | 'without access' };
 
 export type { Role, Metadata };
