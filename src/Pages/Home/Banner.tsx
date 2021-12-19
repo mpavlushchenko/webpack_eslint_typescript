@@ -53,13 +53,15 @@ class Banner extends React.Component<BannerProps, BannerState> {
 
     return (
       <div>
-        <h2>Metadata:</h2>
-        <ul>
-          <li>{title}</li>
-          <li>{postURL}</li>
+        <h2 className="gradient__text">Metadata:</h2>
+        <ul className="section__gradient">
+          <li className="gradient__text">{title}</li>
+          <li className="gradient__text">{postURL}</li>
         </ul>
-        <p>{userName}</p>
+        <p className="">{userName}</p>
         <h5>Project Name: {projectName}</h5>
+
+        <div className="card">rfrfrfrfrf</div>
 
         <button type="button" onClick={this.clickHandler}>
           click <span>{clicks}</span>
