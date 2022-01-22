@@ -3,20 +3,29 @@
     "target": "esnext",
     "allowJs": false,
     "jsx": "react",
-    "module": "ES2020",
+    "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true ,
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "noEmit": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

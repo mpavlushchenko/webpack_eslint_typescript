@@ -1,27 +1,25 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 
 import Card from '../../Components/Card';
 import filterPhotosById, { FilteredIPhotos } from '../../utils/filterPhotosById';
-import client from '../../services/api';
 import IPhotos from './types';
+import useFetchPhotos from './usePhotos';
 import './styles.scss';
 
 const MIN_PHOTO_VALUE: number = 3;
 
 const Photos = (): JSX.Element => {
-  const useFetchPhotos = (page = 1) =>
-    useQuery<IPhotos[]>(
-      'photos',
-      () => client.get(`/photos?_page=${page}&_limit=5`).then((response) => response.data),
-      { staleTime: 10000 }
-    );
-
   const { isLoading, data } = useFetchPhotos();
   const filteredPhotos: Readonly<FilteredIPhotos[]> = filterPhotosById(data, MIN_PHOTO_VALUE);
   // console.log('data', filteredPhotos);
 
-  const handleLoadMore = () => {};
+  // const sendFirstPhoto = (photos, send) => {
+  //   const photo = photos[0];
+  //   send(photo);
+  // };
+  const handleLoadMore = () => {
+    // sendFirstPhoto(data, () => {});
+  };
 
   return (
     <>
