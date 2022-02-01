@@ -1,10 +1,10 @@
-import IPhotos from '../Pages/Photos/types';
+import PhotosInterface from '../Pages/Photos/types';
 
-export interface FilteredIPhotos extends IPhotos {
+export interface FilteredPhotos extends PhotosInterface {
   type?: number | string;
 }
 
-const filteredPhotos = (arr: IPhotos[] = [], param: number): FilteredIPhotos[] =>
-  arr.filter((photo: IPhotos) => photo.id > param);
+const filteredPhotos = (arr: PhotosInterface[], param: number): FilteredPhotos[] =>
+  arr.filter((photo: PhotosInterface) => photo.id > param);
 
 export default filteredPhotos;

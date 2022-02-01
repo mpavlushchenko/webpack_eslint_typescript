@@ -1,4 +1,4 @@
-interface IPhotos {
+interface PhotosInterface {
   albumId: number;
   id: number;
   title?: string;
@@ -6,4 +6,4 @@ interface IPhotos {
   thumbnailUrl?: string;
 }
 
-export default IPhotos;
+export default PhotosInterface;

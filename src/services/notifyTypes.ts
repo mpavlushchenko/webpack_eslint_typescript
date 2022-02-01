@@ -11,7 +11,7 @@ const Notify = {
   success: <T>(message: T) =>
     toast.success(message, {
       message,
-      position: toast.POSITION.BOTTOM_LEFT,
+      position: toast.POSITION.TOP_LEFT,
       autoClose: 2000,
     } as ToastOptions),
 };

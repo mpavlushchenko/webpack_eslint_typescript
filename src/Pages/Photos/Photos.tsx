@@ -1,35 +1,33 @@
 import React from 'react';
 
 import Card from '../../Components/Card';
-import filterPhotosById, { FilteredIPhotos } from '../../utils/filterPhotosById';
-import IPhotos from './types';
-import useFetchPhotos from './usePhotos';
+import filterPhotosById, { FilteredPhotos } from '../../utils/filterPhotosById';
+import { useFetchPhotos } from './usePhotos';
+import PhotosInterface from './types';
 import './styles.scss';
 
 const MIN_PHOTO_VALUE: number = 3;
 
 const Photos = (): JSX.Element => {
-  const { isLoading, data } = useFetchPhotos();
-  const filteredPhotos: Readonly<FilteredIPhotos[]> = filterPhotosById(data, MIN_PHOTO_VALUE);
-  // console.log('data', filteredPhotos);
+  const [page, setPage] = React.useState<number>(1);
 
-  // const sendFirstPhoto = (photos, send) => {
-  //   const photo = photos[0];
-  //   send(photo);
-  // };
+  const { data, isLoading } = useFetchPhotos(page);
+
+  const filteredPhotos: Readonly<FilteredPhotos[]> = filterPhotosById(data, MIN_PHOTO_VALUE);
+
   const handleLoadMore = () => {
-    // sendFirstPhoto(data, () => {});
+    setPage((prev) => prev + 1);
   };
 
   return (
     <>
       {isLoading && <span>Loading...</span>}
       <div className="photos-wrapper">
-        {filteredPhotos && filteredPhotos.map((photo: IPhotos) => <Card key={photo.id} photo={photo} />)}
+        {filteredPhotos && filteredPhotos.map((photo: PhotosInterface) => <Card key={photo.id} photo={photo} />)}
       </div>
       <div>
         <button type="button" onClick={handleLoadMore}>
-          Load more
+          {isLoading ? 'Loading...' : 'Load More'}
         </button>
       </div>
     </>

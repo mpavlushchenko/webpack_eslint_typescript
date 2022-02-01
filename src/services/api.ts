@@ -4,7 +4,7 @@ import Notify from './notifyTypes';
 
 const client = axios.create({
   baseURL: process.env.API_URL,
-  headers: { access_token: 'custom_token' },
+  headers: { access_token: 'custom_token', 'Content-type': 'application/json' },
 });
 client.defaults.timeout = 3000;
 

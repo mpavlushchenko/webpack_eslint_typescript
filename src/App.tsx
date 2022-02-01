@@ -17,12 +17,12 @@ const App = () => (
     <Router>
       <Navigation />
 
-      <Switch>
-        <div className="page">
+      <div className="page">
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/photos" component={Photos} />
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </Router>
   </QueryClientProvider>
 );
