@@ -3,6 +3,7 @@ import { Metadata } from './types';
 import { addMetadata, bind, BaseEntity } from './decorators';
 import CreateElement from '../../Components/Elements/CreateElement';
 import Notify from '../../services/notifyTypes';
+import Counter from '../../Components/Counter';
 
 interface BannerProps {
   readonly userName: string;
@@ -53,6 +54,7 @@ class Banner extends React.Component<BannerProps, BannerState> {
 
     return (
       <div>
+        <Counter />
         <h2 className="gradient__text">Metadata:</h2>
         <ul className="section__gradient">
           <li className="gradient__text">{title}</li>

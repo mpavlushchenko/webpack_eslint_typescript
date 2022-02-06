@@ -1,9 +1,8 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { AxiosError, AxiosResponse } from 'axios';
 
 import PhotosInterface from './types';
-import client from '../../services/api';
+import client, { BASE_API_URL } from '../../services/api';
 
 function useReactQueryPhotos(page = 1) {
   return useQuery<PhotosInterface[]>(
@@ -17,24 +16,28 @@ function useReactQueryPhotos(page = 1) {
 
 function useFetchPhotos(page = 1) {
   const [data, setData] = React.useState<PhotosInterface[]>([]);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoading, setLoading] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<unknown>(null);
+  const BASE_URL = `${BASE_API_URL}/photos?_page=${page}&_limit=10`;
 
   React.useEffect(() => {
-    setIsLoading(true);
+    const fetchPhotos = async () => {
+      setLoading(true);
 
-    client
-      .get<PhotosInterface[]>(`/photos?_page=${page}&_limit=10`)
-      .then((response: AxiosResponse) => {
-        setData((prevState: PhotosInterface[]) => [...prevState, ...response.data]);
-      })
-      .catch((error: AxiosError) => {
-        console.log('error', error);
-      });
+      try {
+        const response = await fetch(BASE_URL);
+        const json = await response.json();
 
-    setIsLoading(false);
+        setData((prevState: PhotosInterface[]) => [...prevState, ...json]);
+      } catch (e: unknown) {
+        setError(e);
+      }
+      setLoading(false);
+    };
+    fetchPhotos();
   }, [page]);
 
-  return { data, isLoading };
+  return { data, isLoading, error };
 }
 
 export { useFetchPhotos, useReactQueryPhotos };

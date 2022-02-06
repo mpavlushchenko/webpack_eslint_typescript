@@ -2,9 +2,11 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import Notify from './notifyTypes';
 
+export const BASE_API_URL = process.env.API_URL;
+
 const client = axios.create({
   baseURL: process.env.API_URL,
-  headers: { access_token: 'custom_token', 'Content-type': 'application/json' },
+  headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 });
 client.defaults.timeout = 3000;
 

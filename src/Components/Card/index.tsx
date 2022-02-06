@@ -8,7 +8,7 @@ interface Props {
   photo: IPhotos;
 }
 
-const Index = ({ photo }: Props) => {
+const Card = ({ photo }: Props) => {
   const { Meta } = AntCard;
 
   const { title, url, thumbnailUrl } = photo;
@@ -19,4 +19,4 @@ const Index = ({ photo }: Props) => {
   );
 };
 
-export default Index;
+export default Card;
